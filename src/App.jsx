@@ -84,9 +84,11 @@ function App() {
             />
           </div>
         ))}
-        <button type="submit" disabled={loading}>
-          {loading ? 'Checking...' : 'Check Portability'}
-        </button>
+        {loading ? (
+          <div className="loader"></div>
+        ) : (
+          <button type="submit">Check Portability</button>
+        )}
       </form>
       {error && <p className="error">{error}</p>}
       {result && (
