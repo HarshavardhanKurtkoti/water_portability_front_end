@@ -66,7 +66,7 @@ function App() {
   };
 
   return (
-    <div className="container">
+    <div className="container app-background">
       <NavBar />
       <h1>Water Portability Checker</h1>
       <form onSubmit={handleSubmit} className="water-form">
@@ -84,15 +84,19 @@ function App() {
             />
           </div>
         ))}
-        <button type="submit" disabled={loading}>
-          {loading ? 'Checking...' : 'Check Portability'}
-        </button>
+        {loading ? (
+          <div className="loader"></div>
+        ) : (
+          <button type="submit">Check Portability</button>
+        )}
       </form>
       {error && <p className="error">{error}</p>}
       {result && (
         <div className="result">
           <h2>Result</h2>
-          <pre>{JSON.stringify(result, null, 2)}</pre>
+          <p>
+            Water is <strong>{result.prediction}</strong>
+          </p>
         </div>
       )}
     </div>
