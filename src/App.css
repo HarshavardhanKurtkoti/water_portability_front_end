@@ -55,7 +55,7 @@
   justify-content: space-between;
   background: linear-gradient(90deg, #2193b0 0%, #6dd5ed 100%);
   padding: 1rem 2vw;
-  border-radius: 0 0 12px 12px;
+  border-radius: 0 0 12px 12px; /* Change to 0 0 12px 12px for both sides rounded */
   box-shadow: 0 2px 8px rgba(33, 147, 176, 0.15);
   box-sizing: border-box;
 }

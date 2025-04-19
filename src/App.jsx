@@ -156,12 +156,12 @@ function App() {
           </form>
           {error && <p className="error">{error}</p>}
           {result && (
-            <div className={`result ${result.prediction === 'portable' ? 'result-portable' : 'result-not-portable'}`}>
+            <div className={`result ${result.prediction && result.prediction.toLowerCase() === 'potable' ? 'result-portable' : 'result-not-portable'}`}>
               <div className="result-icon">
-                {result.prediction === 'portable' ? '✅' : '⚠️'}
+                {result.prediction && result.prediction.toLowerCase() === 'potable' ? '🟢💧' : '⚠️'}
               </div>
               <h2>Result</h2>
-              <div className="result-text">
+              <div className="result-text" style={{ color: result.prediction && result.prediction.toLowerCase() === 'potable' ? '#2e7d32' : '#e57373' }}>
                 Water is <strong>{result.prediction}</strong>
               </div>
             </div>
