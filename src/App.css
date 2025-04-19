@@ -112,7 +112,7 @@
   padding: 2.5rem 5rem;
   border-radius: 32px;
   box-shadow: 0 4px 18px rgba(33, 147, 176, 0.10);
-  max-width: 700px;
+  max-width: 900px; /* Increased width */
   margin: 2.5rem auto 0 auto;
   display: flex;
   flex-direction: column;
@@ -121,7 +121,14 @@
   font-size: 1.12rem;
 }
 
+.form-row {
+  display: flex;
+  gap: 4rem; /* Further increased gap for even more padding between columns */
+  width: 100%;
+}
+
 .form-group {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -204,7 +211,8 @@
   color: #1a2a33;
   border-radius: 48px;
   margin: 2.5rem auto 0 auto;
-  max-width: 900px;
+  max-width: 1200px; /* Increased from 900px to 1200px */
+  width: 98vw; /* Allow to expand more left and right */
   box-shadow: 0 4px 32px rgba(33, 147, 176, 0.10);
 }
 
@@ -250,11 +258,70 @@ h1 {
 }
 
 .result {
-  background: #e0f7fa;
-  border: 1px solid #b2ebf2;
-  border-radius: 8px;
-  padding: 1.2rem 1.5rem;
-  margin: 1.5rem auto;
-  max-width: 420px;
-  box-shadow: 0 2px 8px #b2ebf255;
+  background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+  border: 1.5px solid #b2ebf2;
+  border-radius: 32px; /* Match water-form roundness */
+  padding: 2.2rem 2.5rem 2rem 2.5rem;
+  margin: 2.5rem auto 0 auto;
+  max-width: 480px;
+  box-shadow: 0 6px 24px rgba(33, 147, 176, 0.13); /* Match water-form shadow */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.2s, background 0.2s;
+  animation: pop-in 0.5s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+@keyframes pop-in {
+  0% { transform: scale(0.85); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.result-icon {
+  font-size: 2.8rem;
+  margin-bottom: 0.7rem;
+  margin-top: -0.5rem;
+}
+
+.result-portable {
+  color: #2193b0;
+}
+
+.result-not-portable {
+  color: #e57373;
+}
+
+.result h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.7rem;
+  color: #2193b0;
+  letter-spacing: 0.5px;
+}
+
+.result-text {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+  text-align: center;
+}
+
+.home-page, .about-page {
+  max-width: 480px;
+  margin: 2.5rem auto 0 auto;
+  padding: 0 1.5rem;
+  color: #1a2a33;
+  width: 100%;
+  text-align: center;
+}
+
+@media (max-width: 800px) {
+  .water-form {
+    max-width: 98vw;
+    padding: 1.5rem 1rem;
+  }
+  .form-row {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 }
