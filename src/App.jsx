@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import './App.css'
 
 function NavBar({ setCurrentPage }) {
@@ -80,6 +80,8 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState('home');
+  const [showWaitDialog, setShowWaitDialog] = useState(false);
+  const loaderTimeout = useRef(null);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -90,6 +92,11 @@ function App() {
     setLoading(true);
     setError(null);
     setResult(null);
+    setShowWaitDialog(false);
+    if (loaderTimeout.current) clearTimeout(loaderTimeout.current);
+    loaderTimeout.current = setTimeout(() => {
+      setShowWaitDialog(true);
+    }, 5000);
     try {
       const response = await fetch('https://water-portability-0n5s.onrender.com/predict', {
         method: 'POST',
@@ -113,6 +120,8 @@ function App() {
       setError('Failed to check water portability.');
     } finally {
       setLoading(false);
+      setShowWaitDialog(false);
+      if (loaderTimeout.current) clearTimeout(loaderTimeout.current);
     }
   };
 
@@ -149,7 +158,16 @@ function App() {
               </div>
             ))}
             {loading ? (
-              <div className="loader"></div>
+              <>
+                <div className="loader"></div>
+                {showWaitDialog && (
+                  <dialog open style={{padding:'1.5rem 2.5rem', borderRadius:'16px', border:'none', fontSize:'1.1rem', color:'#1a2a33', background:'#fff', boxShadow:'0 2px 16px #2193b033', zIndex: 2000}}>
+                    <strong>Please wait</strong><br/>
+                    The backend hosted on Render is starting.<br/>
+                    <span style={{fontSize:'0.98rem', color:'#888'}}>Delay due to free tier</span>
+                  </dialog>
+                )}
+              </>
             ) : (
               <button type="submit">Check Portability</button>
             )}
