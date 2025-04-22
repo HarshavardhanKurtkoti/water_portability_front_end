@@ -1,9 +1,12 @@
+html, body {
+  overflow-x: hidden;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  /* Add top padding to prevent content from being hidden under navbar */
   padding-top: 5.5rem;
 }
 
@@ -43,7 +46,6 @@
   color: #888;
 }
 
-/* NavBar Styles */
 .navbar {
   position: fixed;
   top: 0;
@@ -55,7 +57,10 @@
   justify-content: space-between;
   background: linear-gradient(90deg, #2193b0 0%, #6dd5ed 100%);
   padding: 1rem 2vw;
-  border-radius: 0 0 12px 12px; /* Change to 0 0 12px 12px for both sides rounded */
+  padding-left: 2vw; 
+  padding-right: 2.5rem; 
+  border-radius: 0; 
+  overflow-x: auto;
   box-shadow: 0 2px 8px rgba(33, 147, 176, 0.15);
   box-sizing: border-box;
 }
@@ -92,38 +97,159 @@
   color: #222;
 }
 
-/* Responsive for mobile */
 @media (max-width: 600px) {
   .navbar {
     flex-direction: column;
     align-items: flex-start;
-    padding: 1rem;
+    padding: 0.7rem 0.7rem 0.7rem 1rem;
+    gap: 0.5rem;
+    width: 100vw;
+    min-width: 0;
+    width: 100%; /* Take full width of viewport */
+    box-sizing: border-box;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  .navbar-logo {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
   }
   .navbar-links {
     flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+  }
+  .navbar-links li a {
+    font-size: 1rem;
+    padding: 0.4rem 0.7rem;
+    border-radius: 4px;
+  }
+  .app-background,
+  .home-page,
+  .about-page,
+  .water-form {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    box-sizing: border-box;
+  }
+  .app-background {
+    border-radius: 0;
+    margin: 0;
+    max-width: 100vw;
+    padding-bottom: 1.2rem;
+    width: 100%;
+    max-width: 100vw;
+    margin: 0;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    box-sizing: border-box;
+  }
+  .home-page, .about-page {
+    max-width: 100vw;
+    padding: 0 0.5rem;
+    width: 100%;
+    max-width: 100vw;
+    margin: 0;
+    padding: 0 0.5rem;
+    box-sizing: border-box;
+  }
+  .water-form {
+    padding: 1rem 0.5rem;
+    border-radius: 12px;
     gap: 1rem;
     width: 100%;
+    max-width: 100vw;
+    margin: 0 auto;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    box-sizing: border-box;
+  }
+  .form-row {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .form-group input {
+    font-size: 0.98rem;
+    padding: 0.4rem 0.6rem;
+  }
+  .result {
+    padding: 1.2rem 0.7rem 1rem 0.7rem;
+    border-radius: 16px;
+    max-width: 98vw;
+  }
+  h1 {
+    font-size: 1.3em;
+    margin-top: 2.2rem;
+    margin-bottom: 1.2rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  #root {
+    padding-top: 7.5rem; /* Increase top padding to match taller mobile navbar */
+  }
+  .app-background {
+    width: 100%;
+    max-width: 100vw;
+    margin: 0;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    box-sizing: border-box;
+  }
+  .home-page, .about-page {
+    width: 100%;
+    max-width: 100vw;
+    margin: 0;
+    padding: 0 0.5rem;
+    box-sizing: border-box;
+  }
+  .water-form {
+    width: 100%;
+    max-width: 100vw;
+    margin: 0 auto;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    box-sizing: border-box;
+  }
+  .app-background,
+  .home-page,
+  .about-page,
+  .water-form {
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .water-form h1 {
+    text-align: center;
   }
 }
 
-/* Water Form Styles */
 .water-form {
-  background: #e3f6fd;
-  padding: 2.5rem 5rem;
+  max-width: 480px;
+  margin: 2.5rem auto 0 auto;
+  padding: 2.5rem 1.5rem;
   border-radius: 32px;
   box-shadow: 0 4px 18px rgba(33, 147, 176, 0.10);
-  max-width: 900px; /* Increased width */
-  margin: 2.5rem auto 0 auto;
+  background: #e3f6fd;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   color: #1a2a33;
   font-size: 1.12rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .form-row {
   display: flex;
-  gap: 4rem; /* Further increased gap for even more padding between columns */
+  gap: 4rem; 
   width: 100%;
 }
 
@@ -211,8 +337,8 @@
   color: #1a2a33;
   border-radius: 48px;
   margin: 2.5rem auto 0 auto;
-  max-width: 1200px; /* Increased from 900px to 1200px */
-  width: 98vw; /* Allow to expand more left and right */
+  max-width: 1200px; 
+  width: 98vw; 
   box-shadow: 0 4px 32px rgba(33, 147, 176, 0.10);
 }
 
@@ -260,11 +386,11 @@ h1 {
 .result {
   background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
   border: 1.5px solid #b2ebf2;
-  border-radius: 32px; /* Match water-form roundness */
+  border-radius: 32px; 
   padding: 2.2rem 2.5rem 2rem 2.5rem;
   margin: 2.5rem auto 0 auto;
   max-width: 480px;
-  box-shadow: 0 6px 24px rgba(33, 147, 176, 0.13); /* Match water-form shadow */
+  box-shadow: 0 6px 24px rgba(33, 147, 176, 0.13); 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -323,5 +449,49 @@ h1 {
   .form-row {
     flex-direction: column;
     gap: 0.5rem;
+  }
+}
+
+/* Responsive for tablets */
+@media (max-width: 900px) {
+  .app-background {
+    max-width: 100vw;
+    border-radius: 0;
+    margin: 0;
+    padding-bottom: 2rem;
+  }
+  .water-form {
+    max-width: 98vw;
+    width: 100%;
+    padding: 1.5rem 1rem;
+    border-radius: 18px;
+    box-sizing: border-box;
+  }
+  h1 {
+    font-size: 2em;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .navbar {
+    width: 100%; /* Take full width of viewport */
+    min-width: 0;
+    box-sizing: border-box;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  .form-row {
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .form-group {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .form-group input {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
   }
 }
