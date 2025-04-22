@@ -2,19 +2,28 @@ import { useState, useRef } from 'react'
 import './App.css'
 
 function NavBar({ setCurrentPage }) {
+  const handleNavClick = (page) => (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setCurrentPage(page);
+  };
   return (
     <nav className="navbar">
       <div className="navbar-logo">💧 Water Portability</div>
       <ul className="navbar-links">
-        <li><a href="#" onClick={e => { e.preventDefault(); setCurrentPage('home'); }}>Home</a></li>
-        <li><a href="#checker" onClick={e => { e.preventDefault(); setCurrentPage('checker'); }}>Checker</a></li>
-        <li><a href="#about" onClick={e => { e.preventDefault(); setCurrentPage('about'); }}>About</a></li>
+        <li><a href="#" onClick={handleNavClick('home')}>Home</a></li>
+        <li><a href="#checker" onClick={handleNavClick('checker')}>Checker</a></li>
+        <li><a href="#about" onClick={handleNavClick('about')}>About</a></li>
       </ul>
     </nav>
   );
 }
 
 function Home({ onCheck }) {
+  const handleCheck = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    onCheck();
+  };
   return (
     <div className="home-page">
       <h1>Welcome to the Water Portability Checker</h1>
@@ -30,7 +39,7 @@ function Home({ onCheck }) {
       <p style={{marginTop: '1.5rem', fontWeight: 500}}>
         Just click below, enter your water's details, and get your result instantly!
       </p>
-      <button className="check-btn" onClick={onCheck} style={{marginTop: '2.2rem', fontSize: '1.15rem', padding: '0.8rem 2.2rem', borderRadius: '8px', background: 'linear-gradient(90deg, #2193b0 0%, #6dd5ed 100%)', color: '#fff', fontWeight: 'bold', border: 'none', cursor: 'pointer', boxShadow: '0 2px 8px rgba(33, 147, 176, 0.10)'}}>Let's Check</button>
+      <button className="check-btn" onClick={handleCheck} style={{marginTop: '2.2rem', fontSize: '1.15rem', padding: '0.8rem 2.2rem', borderRadius: '8px', background: 'linear-gradient(90deg, #2193b0 0%, #6dd5ed 100%)', color: '#fff', fontWeight: 'bold', border: 'none', cursor: 'pointer', boxShadow: '0 2px 8px rgba(33, 147, 176, 0.10)'}}>Let's Check</button>
     </div>
   );
 }
@@ -61,6 +70,18 @@ function About() {
         Click for Portfolio: <a href="https://portflio-website-azure.vercel.app/" target="_blank" rel="noopener noreferrer">Link</a>
       </p>
     </div>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="footer">
+      <div className="footer-content">
+        <span>💧 Water Portability Checker &copy; 2025 Harshavardhan. All rights reserved.</span>
+        <span className="footer-divider">|</span>
+        <a href="https://portflio-website-azure.vercel.app/" target="_blank" rel="noopener noreferrer">Portfolio</a>
+      </div>
+    </footer>
   );
 }
 
@@ -186,6 +207,7 @@ function App() {
           )}
         </>
       )}
+      <Footer />
     </div>
   );
 }

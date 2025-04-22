@@ -229,28 +229,45 @@ html, body {
   .water-form h1 {
     text-align: center;
   }
+  .form-group label {
+    width: 100%;
+    text-align: center;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
 }
 
 .water-form {
   max-width: 480px;
   margin: 2.5rem auto 0 auto;
-  padding: 2.5rem 1.5rem;
+  padding: 2.5rem 2rem;
   border-radius: 32px;
   box-shadow: 0 4px 18px rgba(33, 147, 176, 0.10);
   background: #e3f6fd;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  align-items: center;
   color: #1a2a33;
   font-size: 1.12rem;
   width: 100%;
   box-sizing: border-box;
 }
 
+@media (min-width: 801px) {
+  .water-form {
+    max-width: 480px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 .form-row {
   display: flex;
-  gap: 4rem; 
+  gap: 2rem;
   width: 100%;
+  justify-content: center;
 }
 
 .form-group {
@@ -259,6 +276,7 @@ html, body {
   flex-direction: column;
   align-items: flex-start;
   gap: 0.2rem;
+  min-width: 0;
 }
 
 .form-group label {
@@ -279,6 +297,7 @@ html, body {
   background: #fafdff;
   box-shadow: 0 1px 2px rgba(33,147,176,0.04);
   transition: border 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
 }
 
 .form-group input:focus {
@@ -318,6 +337,11 @@ html, body {
   transition: background 0.2s;
   box-shadow: 0 2px 8px rgba(33, 147, 176, 0.10);
   letter-spacing: 0.5px;
+  margin-top: 1.2rem;
+  align-self: center;
+  min-width: 180px;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
 }
 
 .water-form button[type="submit"]:hover, .water-form button[type="submit"]:focus {
@@ -493,5 +517,50 @@ h1 {
     width: 100%;
     min-width: 0;
     box-sizing: border-box;
+  }
+}
+
+.footer {
+  width: 100%;
+  background: linear-gradient(90deg, #2193b0 0%, #6dd5ed 100%);
+  color: #fff;
+  padding: 1.2rem 0 1rem 0;
+  text-align: center;
+  font-size: 1.08rem;
+  margin-top: 2.5rem;
+  box-shadow: 0 -2px 8px rgba(33, 147, 176, 0.10);
+  position: relative;
+  left: 0;
+  bottom: 0;
+}
+.footer-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+.footer a {
+  color: #fff;
+  text-decoration: underline;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.footer a:hover {
+  color: #213547;
+}
+.footer-divider {
+  opacity: 0.5;
+  font-size: 1.2em;
+}
+@media (max-width: 600px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 0.3rem;
+    font-size: 0.98rem;
+  }
+  .footer {
+    font-size: 0.98rem;
+    padding: 1rem 0 0.7rem 0;
   }
 }
