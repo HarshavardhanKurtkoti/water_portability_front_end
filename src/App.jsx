@@ -12,7 +12,7 @@ function NavBar({ setCurrentPage }) {
   };
   return (
     <nav className="navbar">
-      <div className="navbar-logo">💧 Water Portability</div>
+      <div className="navbar-logo">💧 Water Potability</div>
       <button
         className="navbar-hamburger"
         aria-label="Toggle navigation menu"
@@ -40,9 +40,9 @@ function Home({ onCheck }) {
   };
   return (
     <div className="home-page">
-      <h1>Welcome to the Water Portability Checker</h1>
+      <h1>Welcome to the Water Potability Checker</h1>
       <p>
-        Unsure if your water is safe to drink? Our tool uses advanced machine learning to instantly analyze your water's chemical properties and tell you if it's portable (safe for drinking).
+        Unsure if your water is safe to drink? Our tool uses advanced machine learning to instantly analyze your water's chemical properties and tell you its potability (suitability for drinking).
       </p>
       <div style={{margin: '1.2rem 0', display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: 400, marginLeft: 'auto', marginRight: 'auto'}}>
         <div style={{
@@ -57,16 +57,16 @@ function Home({ onCheck }) {
           boxSizing: 'border-box',
         }}>
           <ol style={{margin: 0, paddingLeft: '1.2em', color: '#222', fontSize: '1.08rem', fontWeight: 500, wordBreak: 'break-word'}}>
-            <li>Fast, accurate water safety checks</li>
+            <li>Fast, accurate water potability checks</li>
             <li>Simple, user-friendly interface</li>
             <li>Powered by real-world data and AI</li>
           </ol>
         </div>
       </div>
       <p style={{marginTop: '1.5rem', fontWeight: 500}}>
-        Just click below, enter your water's details, and get your result instantly!
+        Just click below, enter your water's details, and get your potability result instantly!
       </p>
-      <button className="check-btn" onClick={handleCheck} style={{marginTop: '2.2rem', fontSize: '1.15rem', padding: '0.8rem 2.2rem', borderRadius: '8px', background: 'linear-gradient(90deg, #2193b0 0%, #6dd5ed 100%)', color: '#fff', fontWeight: 'bold', border: 'none', cursor: 'pointer', boxShadow: '0 2px 8px rgba(33, 147, 176, 0.10)'}}>Let's Check</button>
+      <button className="check-btn" onClick={handleCheck} style={{marginTop: '2.2rem', fontSize: '1.15rem', padding: '0.8rem 2.2rem', borderRadius: '8px', background: 'linear-gradient(90deg, #2193b0 0%, #6dd5ed 100%)', color: '#fff', fontWeight: 'bold', border: 'none', cursor: 'pointer', boxShadow: '0 2px 8px rgba(33, 147, 176, 0.10)'}}>Check Potability</button>
     </div>
   );
 }
@@ -78,14 +78,14 @@ function About({ setCurrentPage }) {
       <div style={{ fontSize: '3.5rem', marginBottom: '0.5rem' }}>💧</div>
       <h1>About This Project</h1>
       <p>
-        The Water Portability Checker is a web application designed to help users quickly assess the safety of water for drinking purposes. By inputting various chemical parameters, users can instantly find out if their water sample is considered portable (safe for drinking).
+        The Water Potability Checker is a web application designed to help users quickly assess the potability of water for drinking purposes. By inputting various chemical parameters, users can instantly find out if their water sample is considered potable (safe for drinking).
       </p>
       {/* How it works section */}
       <h2 style={{ marginTop: '2rem', color: '#2193b0' }}>How It Works</h2>
       <ol style={{ textAlign: 'left', maxWidth: 420, margin: '1.2rem auto', background: '#e3f6fd', borderRadius: 12, padding: '1rem 1.5rem', boxShadow: '0 2px 8px #b2ebf233' }}>
         <li>Enter water quality parameters (pH, Hardness, Solids, etc.).</li>
         <li>Your data is securely sent to a backend machine learning model trained on real-world datasets.</li>
-        <li>You receive an instant prediction on water portability.</li>
+        <li>You receive an instant prediction on water potability.</li>
       </ol>
       {/* Technologies Used section with badges/icons */}
       <h2 style={{ marginTop: '2rem', color: '#2193b0' }}>Technologies Used</h2>
@@ -123,7 +123,7 @@ function About({ setCurrentPage }) {
       </div>
       {/* Disclaimer */}
       <div style={{ margin: '1.5rem 0', background: '#fffbe6', color: '#b26a00', borderRadius: 8, padding: '0.8rem 1.2rem', fontSize: '0.98rem', boxShadow: '0 1px 4px #b2ebf233' }}>
-        <strong>Disclaimer:</strong> This tool provides predictions based on a machine learning model and public datasets. It is not a substitute for certified laboratory testing. Always consult local authorities for critical water safety decisions.
+        <strong>Disclaimer:</strong> This tool provides predictions based on a machine learning model and public datasets. It is not a substitute for certified laboratory testing. Always consult local authorities for critical water potability decisions.
       </div>
       <p style={{ marginTop: '2rem', fontWeight: 500, textAlign: 'center' }}>
         <strong>Created by Harshavardhan Kurtkoti.</strong>
@@ -144,7 +144,7 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="footer-content">
-        <span>💧 Water Portability Checker &copy; 2025 Harshavardhan. All rights reserved.</span>
+        <span>💧 Water Potability Checker &copy; 2025 Harshavardhan. All rights reserved.</span>
         <span className="footer-divider">|</span>
         <a href="https://portflio-website-azure.vercel.app/" target="_blank" rel="noopener noreferrer">Portfolio</a>
       </div>
@@ -205,7 +205,7 @@ function App() {
       const data = await response.json();
       setResult(data);
     } catch (err) {
-      setError('Failed to check water portability.');
+      setError('Failed to check water potability.');
     } finally {
       setLoading(false);
       setShowWaitDialog(false);
@@ -220,7 +220,7 @@ function App() {
       {currentPage === 'about' && <About setCurrentPage={setCurrentPage} />}
       {currentPage === 'checker' && (
         <>
-          <h1>Water Portability Checker</h1>
+          <h1>Water Potability Checker</h1>
           <form onSubmit={handleSubmit} className="water-form">
             {Array.from({ length: Math.ceil(Object.keys(form).length / 2) }).map((_, rowIdx) => (
               <div className="form-row" key={rowIdx}>
@@ -257,7 +257,7 @@ function App() {
                 )}
               </>
             ) : (
-              <button type="submit">Check Portability</button>
+              <button type="submit">Check Potability</button>
             )}
           </form>
           {error && <p className="error">{error}</p>}
@@ -266,9 +266,9 @@ function App() {
               <div className="result-icon">
                 {result.prediction && result.prediction.toLowerCase() === 'potable' ? '🟢💧' : '⚠️'}
               </div>
-              <h2>Result</h2>
+              <h2>Potability Result</h2>
               <div className="result-text" style={{ color: result.prediction && result.prediction.toLowerCase() === 'potable' ? '#2e7d32' : '#e57373' }}>
-                Water is <strong>{result.prediction}</strong>
+                Water Potability: <strong>{result.prediction}</strong>
               </div>
             </div>
           )}
