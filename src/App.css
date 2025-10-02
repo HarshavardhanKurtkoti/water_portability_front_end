@@ -1,14 +1,6 @@
-html, body {
-  overflow-x: hidden;
-}
+html, body { overflow-x: hidden; }
 
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-  padding-top: 5.5rem;
-}
+#root { text-align: center; padding-top: 0; }
 
 .logo {
   height: 6em;
@@ -42,154 +34,11 @@ html, body {
   padding: 2em;
 }
 
-.read-the-docs {
-  color: #888;
-}
+.read-the-docs { color: #888; }
 
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: linear-gradient(90deg, #2193b0 0%, #6dd5ed 100%);
-  padding: 0.7rem 1rem 0.7rem 1rem;
-  box-shadow: 0 2px 8px rgba(33, 147, 176, 0.15);
-  box-sizing: border-box;
-  min-height: 56px;
-}
-
-.navbar-logo {
-  color: #fff;
-  font-size: 1.2rem;
-  font-weight: bold;
-  letter-spacing: 1px;
-  text-shadow: 0 2px 8px rgba(33, 147, 176, 0.25), 0 1px 2px rgba(0,0,0,0.18);
-  justify-self: flex-start;
-  margin-right: 0;
-}
-
-.navbar-links {
-  list-style: none;
-  display: flex;
-  gap: 2rem;
-  margin: 0;
-  padding: 0;
-  margin-left: auto;
-}
-
-.navbar-links li a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 1.1rem;
-  font-weight: 600;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  transition: background 0.2s, color 0.2s;
-  text-shadow: 0 2px 8px rgba(33, 147, 176, 0.25), 0 1px 2px rgba(0,0,0,0.18);
-}
-
-.navbar-links li a:hover {
-  background: rgba(255,255,255,0.18);
-  color: #222;
-}
-
-/* Hamburger styles */
-.navbar-hamburger {
-  display: none !important;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  background: #fff;
-  border: 2px solid #2193b0;
-  border-radius: 8px;
-  cursor: pointer;
-  z-index: 1100;
-  margin-left: auto;
-  margin-right: 0;
-  box-shadow: 0 2px 8px #2193b033;
-  transition: background 0.2s, border 0.2s;
-  position: relative;
-  overflow: hidden;
-}
-.navbar-hamburger:hover, .navbar-hamburger:focus {
-  background: #e0f7fa;
-  border-color: #6dd5ed;
-}
-.navbar-hamburger .bar {
-  width: 22px;
-  height: 3.5px;
-  background: #2193b0;
-  margin: 3.5px 0;
-  border-radius: 2px;
-  transition: 0.3s;
-  display: block;
-}
-/* Add fallback SVG icon if bars are not visible */
-.navbar-hamburger svg {
-  display: none;
-  position: absolute;
-  left: 9px;
-  top: 9px;
-  width: 22px;
-  height: 22px;
-}
-.navbar-hamburger.no-bars svg {
-  display: block;
-}
+/* removed legacy navbar styles */
 
 @media (max-width: 600px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0.7rem 0.7rem 0.7rem 1rem;
-    gap: 0.5rem;
-    width: 100vw;
-    min-width: 0;
-    width: 100%; /* Take full width of viewport */
-    box-sizing: border-box;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    justify-content: space-between;
-  }
-  .navbar-logo {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-    justify-self: unset;
-    margin-right: unset;
-  }
-  .navbar-links {
-    display: none;
-    flex-direction: column;
-    gap: 0.5rem;
-    width: 100%;
-    background: linear-gradient(90deg, #2193b0 0%, #6dd5ed 100%);
-    position: absolute;
-    top: 100%;
-    left: 0;
-    box-shadow: 0 2px 8px rgba(33, 147, 176, 0.15);
-    border-radius: 0 0 12px 12px;
-    padding: 0.7rem 0 0.7rem 0.5rem;
-    z-index: 1001;
-  }
-  .navbar-links.open {
-    display: flex;
-  }
-  .navbar-links {
-    flex-direction: column;
-    gap: 0.5rem;
-    width: 100%;
-  }
-  .navbar-links li a {
-    font-size: 1rem;
-    padding: 0.4rem 0.7rem;
-    border-radius: 4px;
-  }
   .app-background,
   .home-page,
   .about-page,
@@ -255,17 +104,10 @@ html, body {
     padding-right: 0.5rem;
   }
   #root {
-    padding-top: 7.5rem; /* Increase top padding to match taller mobile navbar */
-  }
-  .app-background {
-    width: 100%;
-    max-width: 100vw;
-    margin: 0;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
-    box-sizing: border-box;
-  }
-  .home-page, .about-page {
+    color: #fff;
+    bottom: 0;
     width: 100%;
     max-width: 100vw;
     margin: 0;
@@ -462,33 +304,11 @@ html, body {
   box-shadow: 0 4px 16px rgba(33, 147, 176, 0.18);
 }
 
-.app-background {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding-bottom: 3rem;
-  color: #1a2a33;
-  border-radius: 48px;
-  margin: 2.5rem auto 0 auto;
-  max-width: 1200px; 
-  width: 98vw; 
-  box-shadow: 0 4px 32px rgba(33, 147, 176, 0.10);
-}
+/* replaced by .container-page in index.css using Tailwind */
+.app-background { display: contents; }
 
-h1 {
-  font-size: 2.6em;
-  line-height: 1.1;
-  margin-top: 3.5rem;
-  margin-bottom: 2.2rem;
-  color: #2193b0;
-  text-shadow: 0 2px 8px #b2ebf255;
-  letter-spacing: 1px;
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
-}
+/* Let headings inherit color/spacing; specific pages set sizes with utilities */
+h1 { line-height: 1.1; }
 
 .loader {
   margin: 2rem auto;
@@ -520,17 +340,19 @@ h1 {
 }
 
 .result {
-  background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+  background: linear-gradient(135deg, rgba(224,247,250,0.9) 0%, rgba(178,235,242,0.9) 100%);
   border: 1.5px solid #b2ebf2;
-  border-radius: 32px; 
-  padding: 2.2rem 2.5rem 2rem 2.5rem;
-  margin: 2.5rem auto 0 auto;
-  max-width: 480px;
-  box-shadow: 0 6px 24px rgba(33, 147, 176, 0.13); 
+  border-radius: 24px; 
+  padding: 2rem 2rem 1.8rem 2rem;
+  margin: 2rem auto 0 auto;
+  max-width: 520px;
+  box-shadow: 0 10px 30px rgba(33, 147, 176, 0.15);
   display: flex;
   flex-direction: column;
   align-items: center;
   transition: box-shadow 0.2s, background 0.2s;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   animation: pop-in 0.5s cubic-bezier(.68,-0.55,.27,1.55);
 }
 
@@ -568,14 +390,7 @@ h1 {
   text-align: center;
 }
 
-.home-page, .about-page {
-  max-width: 480px;
-  margin: 2.5rem auto 0 auto;
-  padding: 0 1.5rem;
-  color: #1a2a33;
-  width: 100%;
-  text-align: center;
-}
+.home-page, .about-page { max-width: 72rem; margin: 2rem auto 0 auto; padding: 0 1rem; color: #0f172a; width: 100%; text-align: center; }
 
 @media (max-width: 800px) {
   .water-form {
@@ -645,14 +460,14 @@ h1 {
 }
 
 .footer {
-  width: 100%;
-  background: linear-gradient(90deg, #2193b0 0%, #6dd5ed 100%);
-  color: #fff;
-  padding: 1.2rem 0 1rem 0;
-  text-align: center;
-  font-size: 1.08rem;
-  margin-top: 2.5rem;
-  box-shadow: 0 -2px 8px rgba(33, 147, 176, 0.10);
+  margin: 2rem auto;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 6px solid #6dd5ed;
+  border-top: 6px solid #2193b0;
+  animation: spin 0.9s linear infinite;
+  box-shadow: 0 0 18px #6dd5ed66;
   position: relative;
   left: 0;
   bottom: 0;
@@ -661,7 +476,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1.2rem;
+  gap: 1rem;
   flex-wrap: wrap;
 }
 .footer a {

@@ -1,37 +1,11 @@
 import { useState, useRef } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import './App.css'
 import Contact from './Contact.jsx'
+import Header from './components/Header.jsx'
+import Footer from './components/Footer.jsx'
 
-function NavBar({ setCurrentPage }) {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const handleNavClick = (page) => (e) => {
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    setCurrentPage(page);
-    setMenuOpen(false); // close menu on link click
-  };
-  return (
-    <nav className="navbar">
-      <div className="navbar-logo">💧 Water Potability</div>
-      <button
-        className="navbar-hamburger"
-        aria-label="Toggle navigation menu"
-        aria-expanded={menuOpen}
-        onClick={() => setMenuOpen((v) => !v)}
-      >
-        <span className="bar" style={{background:'#111', display:'block', width:'22px', height:'3.5px', margin:'4px 0', borderRadius:'2px'}}></span>
-        <span className="bar" style={{background:'#111', display:'block', width:'22px', height:'3.5px', margin:'4px 0', borderRadius:'2px'}}></span>
-        <span className="bar" style={{background:'#111', display:'block', width:'22px', height:'3.5px', margin:'4px 0', borderRadius:'2px'}}></span>
-      </button>
-      <ul className={`navbar-links${menuOpen ? ' open' : ''}`}>
-        <li><a href="#" onClick={handleNavClick('home')}>Home</a></li>
-        <li><a href="#checker" onClick={handleNavClick('checker')}>Checker</a></li>
-        <li><a href="#about" onClick={handleNavClick('about')}>About</a></li>
-        <li><a href="#contact" onClick={handleNavClick('contact')}>Contact</a></li>
-      </ul>
-    </nav>
-  );
-}
+// Removed legacy NavBar (replaced with components/Header)
 
 function Home({ onCheck }) {
   const handleCheck = () => {
@@ -39,118 +13,107 @@ function Home({ onCheck }) {
     onCheck();
   };
   return (
-    <div className="home-page">
-      <h1>Welcome to the Water Potability Checker</h1>
-      <p>
-        Unsure if your water is safe to drink? Our tool uses advanced machine learning to instantly analyze your water's chemical properties and tell you its potability (suitability for drinking).
+    <motion.div
+      className="home-page"
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: 'easeOut' }}
+    >
+      <h1 className="text-[2.4rem] md:text-[2.8rem] mt-10 mb-3 text-slate-900 tracking-tight font-extrabold">
+        Welcome to the Water Potability Checker
+      </h1>
+      <p className="max-w-[720px] mx-auto text-slate-600 text-base md:text-lg">
+        Unsure if your water is safe to drink? Our tool uses a machine learning model to instantly analyze your water’s chemical properties and estimate its potability (suitability for drinking).
       </p>
-      <div style={{margin: '1.2rem 0', display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: 400, marginLeft: 'auto', marginRight: 'auto'}}>
-        <div style={{
-          background: '#e6fbff',
-          borderRadius: '18px',
-          padding: '1.2rem 1.5rem',
-          boxShadow: '0 2px 8px #b2ebf233',
-          width: '100%',
-          maxWidth: 480,
-          margin: '0 auto',
-          textAlign: 'left',
-          boxSizing: 'border-box',
-        }}>
-          <ol style={{margin: 0, paddingLeft: '1.2em', color: '#222', fontSize: '1.08rem', fontWeight: 500, wordBreak: 'break-word'}}>
-            <li>Fast, accurate water potability checks</li>
-            <li>Simple, user-friendly interface</li>
-            <li>Powered by real-world data and AI</li>
-          </ol>
+
+      {/* Feature grid */}
+      <div className="mt-8 page-wrap">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {[{
+            title: 'Instant checks',
+            desc: 'Get a quick prediction in seconds—no signup needed.',
+            icon: '⚡'
+          },{
+            title: 'AI-assisted',
+            desc: 'Model trained on real-world data for informed estimates.',
+            icon: '🤖'
+          },{
+            title: 'Privacy-friendly',
+            desc: 'Inputs are sent only for calculation; nothing is stored.',
+            icon: '🔒'
+          }].map((f, i) => (
+            <motion.div key={f.title} initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-20% 0px -20% 0px' }} transition={{ delay: i*0.05, duration: 0.35 }}
+              className="rounded-xl bg-white border border-slate-200 shadow-sm p-5 text-left hover:shadow-md transition-shadow">
+              <div className="text-2xl mb-2">{f.icon}</div>
+              <div className="font-semibold text-slate-900 mb-1">{f.title}</div>
+              <div className="text-slate-600 text-sm leading-relaxed">{f.desc}</div>
+            </motion.div>
+          ))}
         </div>
       </div>
-      <p style={{marginTop: '1.5rem', fontWeight: 500}}>
-        Just click below, enter your water's details, and get your potability result instantly!
-      </p>
-      <button className="check-btn" onClick={handleCheck} style={{marginTop: '2.2rem', fontSize: '1.15rem', padding: '0.8rem 2.2rem', borderRadius: '8px', background: 'linear-gradient(90deg, #2193b0 0%, #6dd5ed 100%)', color: '#fff', fontWeight: 'bold', border: 'none', cursor: 'pointer', boxShadow: '0 2px 8px rgba(33, 147, 176, 0.10)'}}>Check Potability</button>
-    </div>
+
+      <p className="mt-8 font-medium text-slate-700">Just click below, enter your water’s details, and get your potability result instantly!</p>
+      <button className="btn-primary mt-6 text-[1.05rem] px-8 py-3" onClick={handleCheck}>Check Potability</button>
+    </motion.div>
   );
 }
 
 function About({ setCurrentPage }) {
   return (
     <div className="about-page">
-      {/* Visual/Icon at the top */}
-      <div style={{ fontSize: '3.5rem', marginBottom: '0.5rem' }}>💧</div>
-      <h1>About This Project</h1>
-      <p>
-        The Water Potability Checker is a web application designed to help users quickly assess the potability of water for drinking purposes. By inputting various chemical parameters, users can instantly find out if their water sample is considered potable (safe for drinking).
+      <div style={{ fontSize: '3.2rem', marginBottom: '0.25rem' }}>💧</div>
+      <h1 className="text-slate-900">About This Project</h1>
+      <p className="text-slate-600 max-w-[720px] mx-auto">
+        The Water Potability Checker helps you quickly assess whether a water sample is likely potable (safe to drink). Enter a few commonly measured parameters and get an instant AI-assisted estimate.
       </p>
-      {/* How it works section */}
-      <h2 style={{ marginTop: '2rem', color: '#2193b0' }}>How It Works</h2>
-      <ol style={{ textAlign: 'left', maxWidth: 420, margin: '1.2rem auto', background: '#e3f6fd', borderRadius: 12, padding: '1rem 1.5rem', boxShadow: '0 2px 8px #b2ebf233' }}>
-        <li>Enter water quality parameters (pH, Hardness, Solids, etc.).</li>
-        <li>Your data is securely sent to a backend machine learning model trained on real-world datasets.</li>
-        <li>You receive an instant prediction on water potability.</li>
-      </ol>
-      {/* Technologies Used section with badges/icons */}
-      <h2 style={{ marginTop: '2rem', color: '#2193b0' }}>Technologies Used</h2>
-      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.7rem', margin: '1.2rem 0' }}>
-        <span style={{ display: 'flex', alignItems: 'center', background: '#fff', borderRadius: 8, padding: '0.4rem 0.9rem', boxShadow: '0 1px 4px #b2ebf255', fontWeight: 500 }}><span style={{ fontSize: '1.3em', marginRight: 6 }}>💻</span>React</span>
-        <span style={{ display: 'flex', alignItems: 'center', background: '#fff', borderRadius: 8, padding: '0.4rem 0.9rem', boxShadow: '0 1px 4px #b2ebf255', fontWeight: 500 }}><span style={{ fontSize: '1.3em', marginRight: 6 }}>⚡</span>Vite</span>
-        <span style={{ display: 'flex', alignItems: 'center', background: '#fff', borderRadius: 8, padding: '0.4rem 0.9rem', boxShadow: '0 1px 4px #b2ebf255', fontWeight: 500 }}><span style={{ fontSize: '1.3em', marginRight: 6 }}>🎨</span>Custom CSS</span>
-        <span style={{ display: 'flex', alignItems: 'center', background: '#fff', borderRadius: 8, padding: '0.4rem 0.9rem', boxShadow: '0 1px 4px #b2ebf255', fontWeight: 500 }}><span style={{ fontSize: '1.3em', marginRight: 6 }}>🐍</span>Python FastAPI (backend)</span>
+      <h2 className="text-slate-900 mt-8">How it works</h2>
+      <div className="page-wrap">
+        <ol className="m-0 text-left max-w-[720px] mx-auto bg-white rounded-xl px-6 py-5 shadow-sm border border-slate-200">
+          <li>Input water quality parameters such as pH, hardness and turbidity.</li>
+          <li>We send the values to a FastAPI backend running an ML model trained on a public dataset.</li>
+          <li>Within seconds you’ll see a potability prediction with a clear result card.</li>
+        </ol>
       </div>
-      {/* Open source/contribution mention */}
-      <div style={{ margin: '1.5rem 0', fontSize: '1.05rem', color: '#2193b0', fontWeight: 500 }}>
-        This project is <a href="https://github.com/HarshavardhanKurtkoti/water_portability_front_end" target="_blank" rel="noopener noreferrer" style={{ color: '#2193b0', textDecoration: 'underline' }}>open source</a>. Contributions are welcome!
+      <h2 className="text-slate-900 mt-8">Parameters explained</h2>
+      <div className="page-wrap">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-left">
+          {[{k:'pH',v:'Acidity/alkalinity; neutral is ~7.'},{k:'Hardness',v:'Mineral content; higher values can affect taste and scaling.'},{k:'Solids (TDS)',v:'Total dissolved solids; very high values may indicate impurities.'},{k:'Chloramines',v:'Used for disinfection; excessive levels may affect taste.'},{k:'Sulfate',v:'High amounts can cause a bitter taste.'},{k:'Conductivity',v:'Indicates ion concentration; correlates with TDS.'},{k:'Organic carbon',v:'Presence of organic matter in water.'},{k:'Trihalomethanes',v:'By‑products of chlorination; should be limited.'},{k:'Turbidity',v:'Cloudiness; higher values often reduce potability.'}].map(item => (
+            <div key={item.k} className="rounded-lg bg-white border border-slate-200 p-4 shadow-sm">
+              <div className="font-semibold text-slate-900">{item.k}</div>
+              <div className="text-slate-600 text-sm">{item.v}</div>
+            </div>
+          ))}
+        </div>
       </div>
-      {/* Backend API link */}
-      <div style={{ margin: '1.2rem 0', fontSize: '1.05rem' }}>
-        Backend API: <a href="https://water-portability-0n5s.onrender.com/docs" target="_blank" rel="noopener noreferrer">API Docs</a>
+      <h2 className="text-slate-900 mt-8">Tech stack</h2>
+      <div className="flex flex-wrap justify-center gap-2 my-4">
+        <span className="flex items-center bg-white rounded-md px-3 py-1 shadow-sm border border-slate-200 font-medium"><span className="text-lg mr-1">💻</span>React</span>
+        <span className="flex items-center bg-white rounded-md px-3 py-1 shadow-sm border border-slate-200 font-medium"><span className="text-lg mr-1">⚡</span>Vite</span>
+        <span className="flex items-center bg-white rounded-md px-3 py-1 shadow-sm border border-slate-200 font-medium"><span className="text-lg mr-1">🎨</span>Tailwind</span>
+        <span className="flex items-center bg-white rounded-md px-3 py-1 shadow-sm border border-slate-200 font-medium"><span className="text-lg mr-1">🐍</span>FastAPI</span>
       </div>
-      {/* Contact/Feedback link with buttons */}
-      <div style={{ margin: '1.2rem 0', fontSize: '1.05rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-        <button
-          style={{ background: 'linear-gradient(90deg, #2193b0 0%, #6dd5ed 100%)', color: '#fff', fontWeight: 'bold', border: 'none', borderRadius: 6, padding: '0.6rem 1.4rem', fontSize: '1rem', cursor: 'pointer' }}
-          onClick={() => { if (typeof setCurrentPage === 'function') setCurrentPage('contact'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-        >
-          Contact Form
-        </button>
-        <button
-          style={{ background: '#fff', color: '#2193b0', fontWeight: 'bold', border: '1.5px solid #2193b0', borderRadius: 6, padding: '0.6rem 1.4rem', fontSize: '1rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5em' }}
-          onClick={() => {
-            navigator.clipboard.writeText('harshavardhankurtkoti@gmail.com');
-            alert('Email copied to clipboard!');
-          }}
-        >
-          <span>📋</span> harshavardhankurtkoti@gmail.com
-        </button>
+      <div className="my-6 text-slate-600 font-medium">
+        This project is <a href="https://github.com/HarshavardhanKurtkoti/water_portability_front_end" target="_blank" rel="noopener noreferrer" className="underline">open source</a>. Contributions are welcome!
       </div>
-      {/* Disclaimer */}
-      <div style={{ margin: '1.5rem 0', background: '#fffbe6', color: '#b26a00', borderRadius: 8, padding: '0.8rem 1.2rem', fontSize: '0.98rem', boxShadow: '0 1px 4px #b2ebf233' }}>
-        <strong>Disclaimer:</strong> This tool provides predictions based on a machine learning model and public datasets. It is not a substitute for certified laboratory testing. Always consult local authorities for critical water potability decisions.
+      <div className="my-4 text-slate-600">
+        Backend API: <a href="https://water-portability-0n5s.onrender.com/docs" target="_blank" rel="noopener noreferrer" className="underline">API Docs</a>
       </div>
-      <p style={{ marginTop: '2rem', fontWeight: 500, textAlign: 'center' }}>
-        <strong>Created by Harshavardhan Kurtkoti.</strong>
-      </p>
-      <p style={{ marginTop: '1.5rem', textAlign: 'center' }}>
-        <button
-          style={{ background: 'linear-gradient(90deg, #2193b0 0%, #6dd5ed 100%)', color: '#fff', fontWeight: 'bold', border: 'none', borderRadius: 6, padding: '0.6rem 1.4rem', fontSize: '1rem', cursor: 'pointer' }}
-          onClick={() => window.open('https://portflio-website-azure.vercel.app/', '_blank', 'noopener,noreferrer')}
-        >
-          Click for Portfolio
-        </button>
+      <div className="my-4 text-slate-600 flex gap-3 justify-center flex-wrap">
+        <button className="btn-primary px-4 py-2" onClick={() => { if (typeof setCurrentPage === 'function') setCurrentPage('checker'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>Try the checker</button>
+        <button className="px-4 py-2 rounded-md border border-slate-300 text-slate-700 font-semibold hover:bg-slate-50" onClick={() => { if (typeof setCurrentPage === 'function') setCurrentPage('contact'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>Contact</button>
+      </div>
+      <div className="my-6 bg-[#fffbe6] text-[#8a5c00] rounded-md px-4 py-3 text-[0.98rem] shadow-sm border border-[#ffe6a7]">
+        <strong>Disclaimer:</strong> Predictions are estimates only and not a substitute for certified laboratory testing. Consult local authorities for critical potability decisions.
+      </div>
+      <p className="mt-6 font-medium text-center"><strong>Created by Harshavardhan Kurtkoti.</strong></p>
+      <p className="mt-4 text-center">
+        <button className="btn-primary px-4 py-2" onClick={() => window.open('https://portflio-website-azure.vercel.app/', '_blank', 'noopener,noreferrer')}>View Portfolio</button>
       </p>
     </div>
   );
 }
 
-function Footer() {
-  return (
-    <footer className="footer">
-      <div className="footer-content">
-        <span>💧 Water Potability Checker &copy; 2025 Harshavardhan. All rights reserved.</span>
-        <span className="footer-divider">|</span>
-        <a href="https://portflio-website-azure.vercel.app/" target="_blank" rel="noopener noreferrer">Portfolio</a>
-      </div>
-    </footer>
-  );
-}
+// Removed legacy in-file Footer (replaced with components/Footer)
 
 function App() {
   const [form, setForm] = useState({
@@ -214,37 +177,77 @@ function App() {
   };
 
   return (
-    <div className="container app-background">
-      <NavBar setCurrentPage={setCurrentPage} />
-      {currentPage === 'home' && <Home onCheck={() => setCurrentPage('checker')} />}
-      {currentPage === 'about' && <About setCurrentPage={setCurrentPage} />}
+    <div className="min-h-screen bg-[--bg-grad]">
+      <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      <AnimatePresence mode="wait">
+      {currentPage === 'home' && (
+        <motion.div
+          key="home"
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.25 }}
+          className="w-full page-wrap"
+        >
+          <Home onCheck={() => setCurrentPage('checker')} />
+        </motion.div>
+      )}
+      {currentPage === 'about' && (
+        <motion.div
+          key="about"
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.25 }}
+          className="w-full page-wrap"
+        >
+          <About setCurrentPage={setCurrentPage} />
+        </motion.div>
+      )}
       {currentPage === 'checker' && (
+        <motion.div
+          key="checker"
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.25 }}
+          className="w-full page-wrap"
+        >
         <>
-          <h1>Water Potability Checker</h1>
-          <form onSubmit={handleSubmit} className="water-form">
-            {Array.from({ length: Math.ceil(Object.keys(form).length / 2) }).map((_, rowIdx) => (
-              <div className="form-row" key={rowIdx}>
-                {[0, 1].map((colIdx) => {
-                  const idx = rowIdx * 2 + colIdx;
-                  const key = Object.keys(form)[idx];
-                  if (!key) return null;
-                  return (
-                    <div key={key} className="form-group">
-                      <label htmlFor={key}>{key.replace('_', ' ')}:</label>
-                      <input
-                        type="number"
-                        step="any"
-                        id={key}
-                        name={key}
-                        value={form[key]}
-                        onChange={handleChange}
-                        required
-                      />
-                    </div>
-                  );
-                })}
-              </div>
-            ))}
+          <h1 className="text-[2.2rem] md:text-[2.6rem] mt-12 mb-4 text-slate-900 tracking-tight font-extrabold">Water Potability Checker</h1>
+          <p className="text-slate-600 max-w-[720px] mx-auto">Provide water quality parameters below. Values don’t need to be perfect; approximate readings work.</p>
+
+          {/* Card container */}
+          <form onSubmit={handleSubmit} className="mt-5 max-w-xl mx-auto bg-white border border-slate-200 rounded-2xl shadow-sm p-6 md:p-8 text-left">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {[
+                { key:'ph', label:'pH', placeholder:'e.g., 7.2' },
+                { key:'Hardness', label:'Hardness (mg/L)', placeholder:'e.g., 170' },
+                { key:'Solids', label:'Total Dissolved Solids (ppm)', placeholder:'e.g., 350' },
+                { key:'Chloramines', label:'Chloramines (ppm)', placeholder:'e.g., 7.0' },
+                { key:'Sulfate', label:'Sulfate (mg/L)', placeholder:'e.g., 330' },
+                { key:'Conductivity', label:'Conductivity (µS/cm)', placeholder:'e.g., 420' },
+                { key:'Organic_carbon', label:'Organic carbon (mg/L)', placeholder:'e.g., 10.5' },
+                { key:'Trihalomethanes', label:'Trihalomethanes (µg/L)', placeholder:'e.g., 70' },
+                { key:'Turbidity', label:'Turbidity (NTU)', placeholder:'e.g., 3.5' },
+              ].map((f) => (
+                <div key={f.key}>
+                  <label htmlFor={f.key} className="block text-sm font-medium text-slate-700 mb-1">{f.label}</label>
+                  <input
+                    type="number"
+                    step="any"
+                    id={f.key}
+                    name={f.key}
+                    value={form[f.key]}
+                    onChange={handleChange}
+                    required
+                    placeholder={f.placeholder}
+                    className="block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 placeholder-slate-400 shadow-sm focus:border-blue-400 focus:ring-2 focus:ring-blue-400 outline-none"
+                  />
+                </div>
+              ))}
+            </div>
+
             {loading ? (
               <>
                 <div className="loader"></div>
@@ -257,12 +260,18 @@ function App() {
                 )}
               </>
             ) : (
-              <button type="submit">Check Potability</button>
+              <button type="submit" className="btn-primary mt-4 w-full sm:w-auto px-10 py-3">Check Potability</button>
             )}
           </form>
+          <div className="text-slate-500 text-sm mt-3">We do not permanently store your inputs; they’re used only for calculation.</div>
           {error && <p className="error">{error}</p>}
           {result && (
-            <div className={`result ${result.prediction && result.prediction.toLowerCase() === 'potable' ? 'result-portable' : 'result-not-portable'}`}>
+            <motion.div
+              className={`result ${result.prediction && result.prediction.toLowerCase() === 'potable' ? 'result-portable' : 'result-not-portable'}`}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.35, ease: 'easeOut' }}
+            >
               <div className="result-icon">
                 {result.prediction && result.prediction.toLowerCase() === 'potable' ? '🟢💧' : '⚠️'}
               </div>
@@ -270,12 +279,25 @@ function App() {
               <div className="result-text" style={{ color: result.prediction && result.prediction.toLowerCase() === 'potable' ? '#2e7d32' : '#e57373' }}>
                 Water Potability: <strong>{result.prediction}</strong>
               </div>
-            </div>
+            </motion.div>
           )}
         </>
+        </motion.div>
       )}
-      {currentPage === 'contact' && <Contact />}
-      <Footer />
+      {currentPage === 'contact' && (
+        <motion.div
+          key="contact"
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.25 }}
+          className="w-full"
+        >
+          <Contact />
+        </motion.div>
+      )}
+      </AnimatePresence>
+  <Footer />
     </div>
   );
 }

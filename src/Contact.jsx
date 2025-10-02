@@ -45,65 +45,32 @@ const Contact = () => {
   };
 
   return (
-    <section style={{ width: '100%' }}>
-      <div className="water-form" style={{ margin: '2.5rem auto 0 auto', maxWidth: 480, color: '#1a2a33' }}>
-        <h1 style={{ color: '#2193b0', marginBottom: '1.2rem', fontSize: '2em', textAlign: 'center' }}>Contact Me</h1>
-        <p style={{ color: '#808080', marginBottom: 24, textAlign: 'center' }}>I would love to hear from you! Please fill out the form below to reach out.</p>
+    <section className="w-full page-wrap">
+      <div className="max-w-xl mx-auto bg-white border border-slate-200 rounded-2xl shadow-sm p-6 md:p-8 mt-8 text-left">
+        <h1 className="text-slate-900 text-[2rem] mb-2 text-center">Contact</h1>
+        <p className="text-slate-500 mb-6 text-center">Have feedback or a question? Send a note and I’ll get back soon.</p>
         {alert.show && (
-          <div style={{ margin: '1rem auto', padding: '0.8rem 1.2rem', borderRadius: 8, background: alert.type === 'success' ? '#e0f7fa' : '#fff6f6', color: alert.type === 'success' ? '#2193b0' : '#e57373', fontWeight: 500, maxWidth: 400, textAlign: 'center' }}>
+          <div className={`mb-4 px-4 py-2 rounded-md text-center font-medium ${alert.type === 'success' ? 'bg-[#e0f7fa] text-[#2193b0]' : 'bg-[#fef2f2] text-[#b91c1c]'}`}>
             {alert.text}
           </div>
         )}
-        <form ref={formRef} onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', width: '100%' }}>
-          <div className="form-group">
-            <label htmlFor="name">Full Name:</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              required
-              className="contact-input"
-              placeholder="ie: Harshavardhan Kurtkoti"
-              style={{ fontSize: '1rem' }}
-            />
+        <form ref={formRef} onSubmit={handleSubmit} className="grid grid-cols-1 gap-4">
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
+            <input type="text" id="name" name="name" value={form.name} onChange={handleChange} required className="contact-input" placeholder="Harshavardhan Kurtkoti" />
           </div>
-          <div className="form-group">
-            <label htmlFor="email">Email address:</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              required
-              className="contact-input"
-              placeholder="ie: kurtkoti.harsha@gmail.com"
-              style={{ fontSize: '1rem' }}
-            />
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-1">Email address</label>
+            <input type="email" id="email" name="email" value={form.email} onChange={handleChange} required className="contact-input" placeholder="kurtkoti.harsha@gmail.com" />
           </div>
-          <div className="form-group">
-            <label htmlFor="message">Your message:</label>
-            <textarea
-              id="message"
-              name="message"
-              value={form.message}
-              onChange={handleChange}
-              required
-              rows={5}
-              className="contact-input"
-              placeholder="Add your message here..."
-              style={{ fontSize: '1rem', resize: 'vertical' }}
-            />
+          <div>
+            <label htmlFor="message" className="block text-sm font-medium text-slate-700 mb-1">Your message</label>
+            <textarea id="message" name="message" value={form.message} onChange={handleChange} required rows={5} className="contact-input" placeholder="Add your message here..." style={{ resize: 'vertical' }} />
           </div>
-          <button
-            type="submit"
-            disabled={loading}
-            style={{ background: 'linear-gradient(90deg, #2193b0 0%, #6dd5ed 100%)', color: '#fff', fontWeight: 'bold', border: 'none', borderRadius: 6, padding: '0.7rem 0', fontSize: '1.1rem', cursor: loading ? 'not-allowed' : 'pointer', minWidth: 180, marginTop: 8 }}
-          >
+          <button type="submit" disabled={loading} className="btn-primary min-w-[180px] py-3 justify-self-start" style={{ cursor: loading ? 'not-allowed' : 'pointer' }}>
             {loading ? 'Sending...' : 'Send Message'}
           </button>
+          <div className="text-slate-500 text-xs">Your email is used only to respond. No marketing or storage.</div>
         </form>
       </div>
     </section>
